@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  api:
+    image: myapi:latest
+    container_name: my-api-container
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      DB_CNN: mongodb://mongo:27017/cursoDB
+    networks:
+      - mynetwork
+
+  mongo:
+    image: mongo:latest
+    container_name: mi-mongo-container
+    ports:
+      - "27017:27017"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
